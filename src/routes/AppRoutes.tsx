@@ -1,34 +1,31 @@
 import { Routes, Route } from "react-router-dom";
 import Layout from "../components/Layout";
-
-// Views
-import HomePage from "../views/HomePage";
-import ThreeDemoView from "../views/ThreeDemoView";
-import LayoutsView from "../views/LayoutsView";
-import SpeechDemoView from "../views/SpeechDemoView";
-import GeometryExplorer from "../views/GeometryExplorer";
-import SettingsView from "../views/SettingsView";
-import TablasMul from "../views/TablasMul";
-import ConversorUnid from "../views/ConversorUnid";
-import ValidContrasena from "../views/ValidContrasena";
-import ContadorClics from "../views/ContadorClics";
-import ListaTareas from "../views/ListaTareas";
+import LandingPage from "../pages/LandingPage";
+import LoginPage from "../modules/auth/LoginPage";
+import RegisterPage from "../modules/auth/RegisterPage";
+import Math3DPage from "../modules/math3d/Math3DPage";
+import SolarPage from "../modules/solar/SolarPage";
+import Geo3DPage from "../modules/geo/Geo3DPage";
+import PlaceholderPage from "../pages/PlaceholderPage";
 
 export default function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route index element={<HomePage />} />
-        <Route path="three" element={<ThreeDemoView />} />
-        <Route path="layouts" element={<LayoutsView />} />
-        <Route path="tts" element={<SpeechDemoView />} />
-        <Route path="three_2" element={<GeometryExplorer />} />
-        <Route path="settings" element={<SettingsView />} />
-        <Route path="tablasmul" element={<TablasMul />} />
-        <Route path="conversorunid" element={<ConversorUnid />} />
-        <Route path="validcontrasena" element={<ValidContrasena />} />
-        <Route path="contadorclics" element={<ContadorClics />} />
-        <Route path="listareas" element={<ListaTareas />} />
+        <Route index element={<LandingPage />} />
+        <Route path="login" element={<LoginPage />} />
+        <Route path="register" element={<RegisterPage />} />
+        <Route path="matematicas" element={<Math3DPage />} />
+        <Route path="sistema-solar" element={<SolarPage />} />
+        <Route path="mapa-3d" element={<Geo3DPage />} />
+        <Route
+          path="evaluaciones"
+          element={<PlaceholderPage title="Evaluaciones" description="El motor de cuestionarios adaptativos se añadirá en el siguiente bloque de trabajo." />}
+        />
+        <Route
+          path="dashboard"
+          element={<PlaceholderPage title="Dashboard Docente" description="Estamos construyendo analíticas para docentes. Próximamente podrás ver promedios y progreso." />}
+        />
       </Route>
     </Routes>
   );
