@@ -6,7 +6,8 @@ import RegisterPage from "../modules/auth/RegisterPage";
 import Math3DPage from "../modules/math3d/Math3DPage";
 import SolarPage from "../modules/solar/SolarPage";
 import Geo3DPage from "../modules/geo/Geo3DPage";
-import PlaceholderPage from "../pages/PlaceholderPage";
+import EvaluationsPage from "../modules/eval/EvaluationsPage";
+import TeacherDashboard from "../dashboard/TeacherDashboard";
 
 export default function AppRoutes() {
   return (
@@ -18,14 +19,8 @@ export default function AppRoutes() {
         <Route path="matematicas" element={<Math3DPage />} />
         <Route path="sistema-solar" element={<SolarPage />} />
         <Route path="mapa-3d" element={<Geo3DPage />} />
-        <Route
-          path="evaluaciones"
-          element={<PlaceholderPage title="Evaluaciones" description="El motor de cuestionarios adaptativos se añadirá en el siguiente bloque de trabajo." />}
-        />
-        <Route
-          path="dashboard"
-          element={<PlaceholderPage title="Dashboard Docente" description="Estamos construyendo analíticas para docentes. Próximamente podrás ver promedios y progreso." />}
-        />
+        <Route path="evaluaciones" element={<EvaluationsPage />} />
+        <Route path="dashboard" element={<TeacherDashboard />} />
       </Route>
     </Routes>
   );
