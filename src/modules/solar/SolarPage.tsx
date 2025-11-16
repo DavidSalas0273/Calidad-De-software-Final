@@ -65,7 +65,7 @@ function OrbitPath({ radius }: { radius: number }) {
   return (
     <lineLoop>
       <bufferGeometry>
-        <bufferAttribute attach="attributes-position" count={positions.length / 3} array={positions} itemSize={3} />
+        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
       </bufferGeometry>
       <lineBasicMaterial color="#1f2937" />
     </lineLoop>
