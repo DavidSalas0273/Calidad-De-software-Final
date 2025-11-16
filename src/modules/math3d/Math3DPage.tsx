@@ -557,7 +557,6 @@ function TetrisGame() {
             {boardWithPiece.map((row, rowIndex) =>
               row.map((cell, cellIndex) => (
                 <div
-                  // eslint-disable-next-line react/no-array-index-key
                   key={`${rowIndex}-${cellIndex}`}
                   className="h-7 w-full rounded-sm border border-slate-900/80"
                   style={{ backgroundColor: cell ?? "rgba(255,255,255,0.05)" }}

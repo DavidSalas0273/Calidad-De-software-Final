@@ -1,13 +1,7 @@
-const sumaModule = require('../suma');
-const suma =
-  sumaModule.default ||
-  sumaModule.suma ||
-  (typeof sumaModule === 'function' ? sumaModule : undefined);
+/* eslint-env jest */
 
-if (typeof suma !== 'function') {
-  throw new Error('No se pudo importar la función suma');
-}
+import suma from "../suma/index.js";
 
-test('suma básica', () => {
+test("suma básica", () => {
   expect(suma(2, 3)).toBe(5);
 });
