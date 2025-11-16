@@ -1,20 +1,12 @@
-const config = {
+export default {
   preset: "ts-jest",
-  testEnvironment: "node",
-  testMatch: ["**/tests/**/*.test.(ts|js)"],
-  moduleFileExtensions: ["ts", "js", "json", "node"],
-  transform: {
-    "^.+\\.(ts|tsx)$": [
-      "ts-jest",
-      {
-        tsconfig: "tsconfig.jest.json",
-      },
-    ],
+  testEnvironment: "jsdom",
+  moduleNameMapper: {
+    "^.+\\.(css|scss|sass|less)$": "identity-obj-proxy",
   },
+  setupFilesAfterEnv: ["<rootDir>/src/setupTests.ts"],
+  transform: {
+    "^.+\\.(ts|tsx)$": ["ts-jest", { useESM: true }],
+  },
+  extensionsToTreatAsEsm: [".ts", ".tsx"],
 };
-
-export default config;
-
-if (typeof module !== "undefined") {
-  module.exports = config;
-}

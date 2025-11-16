@@ -6,7 +6,7 @@ const navItems = [
   { label: "Inicio", href: "/" },
   { label: "Matemáticas 3D", href: "/matematicas" },
   { label: "Sistema Solar", href: "/sistema-solar" },
-  { label: "Mapa 3D", href: "/mapa-3d" },
+  { label: "Mapa 3D a pintar", href: "/mapa-3d" },
   { label: "Evaluaciones", href: "/evaluaciones" },
   { label: "Dashboard Docente", href: "/dashboard" },
   { label: "Acceso", href: "/login" },
