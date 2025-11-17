@@ -27,9 +27,9 @@ interface LoginPayload {
 
 interface AuthContextValue {
   currentUser: AuthUser | null;
-  register: (_payload: RegisterPayload) => Promise<void>;
-  login: (_payload: LoginPayload) => Promise<void>;
-  logout: () => void;
+  register(payload: RegisterPayload): Promise<void>;
+  login(payload: LoginPayload): Promise<void>;
+  logout(): void;
 }
 
 const USERS_KEY = "immersive_users";
