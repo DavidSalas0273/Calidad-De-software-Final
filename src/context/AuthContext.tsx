@@ -27,8 +27,8 @@ interface LoginPayload {
 
 interface AuthContextValue {
   currentUser: AuthUser | null;
-  register(payload: RegisterPayload): Promise<void>;
-  login(payload: LoginPayload): Promise<void>;
+  register({}: RegisterPayload): Promise<void>;
+  login({}: LoginPayload): Promise<void>;
   logout(): void;
 }
 
