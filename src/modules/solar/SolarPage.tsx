@@ -1,4 +1,4 @@
-import { Suspense, useMemo, useRef } from "react";
+import { Suspense, useCallback, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, PerspectiveCamera, Stars } from "@react-three/drei";
 import type { Mesh } from "three";
@@ -73,6 +73,26 @@ function OrbitPath({ radius }: { radius: number }) {
 }
 
 export default function SolarPage() {
+  const [selectedPlanet, setSelectedPlanet] = useState<PlanetConfig | null>(null);
+
+  const speakPlanetInfo = useCallback((planet: PlanetConfig) => {
+    if (typeof window === "undefined") return;
+    const synth = window.speechSynthesis;
+    if (!synth) return;
+    const utterance = new SpeechSynthesisUtterance(`${planet.name}. ${planet.description}`);
+    utterance.lang = "es-ES";
+    synth.cancel();
+    synth.speak(utterance);
+  }, []);
+
+  const handlePlanetSelect = useCallback(
+    (planet: PlanetConfig) => {
+      setSelectedPlanet(planet);
+      speakPlanetInfo(planet);
+    },
+    [speakPlanetInfo],
+  );
+
   return (
     <section className="space-y-8">
       <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
@@ -123,15 +143,29 @@ export default function SolarPage() {
         <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 space-y-4">
           <h3 className="text-xl font-semibold text-slate-900 dark:text-white">Datos rápidos de los planetas</h3>
           <ul className="divide-y divide-slate-200 dark:divide-slate-800">
-            {planetData.map((planet) => (
-              <li key={planet.name} className="py-3 flex items-start gap-3">
-                <span className="h-3 w-3 rounded-full mt-1.5" style={{ backgroundColor: planet.color }} />
-                <div>
-                  <p className="font-semibold text-slate-900 dark:text-white">{planet.name}</p>
-                  <p className="text-sm text-slate-500">{planet.description}</p>
-                </div>
-              </li>
-            ))}
+            {planetData.map((planet) => {
+              const isSelected = selectedPlanet?.name === planet.name;
+              return (
+                <li key={planet.name} className="py-1.5">
+                  <button
+                    type="button"
+                    onClick={() => handlePlanetSelect(planet)}
+                    aria-pressed={isSelected}
+                    className={`flex w-full items-start gap-3 rounded-2xl p-3 text-left transition ${
+                      isSelected
+                        ? "bg-amber-50 ring-2 ring-amber-300 dark:bg-slate-800/70 dark:ring-amber-200"
+                        : "bg-transparent hover:bg-slate-50 dark:hover:bg-slate-800/50"
+                    }`}
+                  >
+                    <span className="h-3 w-3 rounded-full mt-1.5" style={{ backgroundColor: planet.color }} />
+                    <div>
+                      <p className="font-semibold text-slate-900 dark:text-white">{planet.name}</p>
+                      <p className="text-sm text-slate-500">{planet.description}</p>
+                    </div>
+                  </button>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </div>
