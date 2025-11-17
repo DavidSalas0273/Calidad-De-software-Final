@@ -25,20 +25,10 @@ interface LoginPayload {
   password: string;
 }
 
-type RegisterHandler = (payload: RegisterPayload) => Promise<void>;
-type LoginHandler = (payload: LoginPayload) => Promise<void>;
-
-interface AuthContextValue {
-  currentUser: AuthUser | null;
-  register: RegisterHandler;
-  login: LoginHandler;
-  logout(): void;
-}
-
 const USERS_KEY = "immersive_users";
 const SESSION_KEY = "immersive_active_user";
 
-const AuthContext = createContext<AuthContextValue | undefined>(undefined);
+const AuthContext = createContext<ReturnType<typeof useAuthProviderValue> | undefined>(undefined);
 
 const safeLocalStorage = () => {
   if (typeof window === "undefined") {
@@ -101,7 +91,7 @@ const persistSession = (user: AuthUser | null) => {
   }
 };
 
-export function AuthProvider({ children }: { children: React.ReactNode }) {
+function useAuthProviderValue() {
   const [users, setUsers] = useState<StoredUser[]>(() => readUsers());
   const [currentUser, setCurrentUser] = useState<AuthUser | null>(() => readSession());
 
@@ -159,12 +149,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     persistSession(null);
   };
 
-  const value: AuthContextValue = {
+  return {
     currentUser,
     register,
     login,
     logout,
   };
+}
+
+export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const value = useAuthProviderValue();
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
