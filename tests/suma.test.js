@@ -1,4 +1,4 @@
-/* eslint-env jest */
+/* eslint-env jest, node */
 
 const suma = require("../suma/index.js");
 

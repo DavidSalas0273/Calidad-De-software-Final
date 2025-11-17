@@ -53,7 +53,7 @@ export default [
 
   // Overrides para archivos de test y setup: habilitar globals de Jest
   {
-    files: ["**/*.test.ts", "**/*.test.tsx", "src/setupTests.ts"],
+    files: ["**/*.test.ts", "**/*.test.tsx", "**/*.test.js", "src/setupTests.ts"],
     languageOptions: {
       globals: {
         describe: "readonly",
@@ -66,6 +66,7 @@ export default [
         vi: "readonly",
         window: "readonly",
         document: "readonly",
+        require: "readonly",
       },
     },
     rules: {
@@ -93,6 +94,22 @@ export default [
     files: ["eslint.config.js", "jest.config.js"],
     languageOptions: {
       sourceType: "module",
+    },
+  },
+
+  // Overrides para archivos CommonJS de módulos
+  {
+    files: ["suma/index.js"],
+    languageOptions: {
+      sourceType: "commonjs",
+      globals: {
+        module: "readonly",
+        require: "readonly",
+        __dirname: "readonly",
+        __filename: "readonly",
+        process: "readonly",
+        exports: "readonly",
+      },
     },
   },
 ];

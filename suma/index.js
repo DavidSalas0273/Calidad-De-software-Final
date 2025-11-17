@@ -1,3 +1,5 @@
+/* eslint-env node */
+
 function suma(a, b) {
   return a + b;
 }
