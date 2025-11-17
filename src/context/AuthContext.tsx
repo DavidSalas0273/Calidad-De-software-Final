@@ -25,10 +25,13 @@ interface LoginPayload {
   password: string;
 }
 
+type RegisterHandler = (payload: RegisterPayload) => Promise<void>;
+type LoginHandler = (payload: LoginPayload) => Promise<void>;
+
 interface AuthContextValue {
   currentUser: AuthUser | null;
-  register: (...args: [RegisterPayload]) => Promise<void>;
-  login: (...args: [LoginPayload]) => Promise<void>;
+  register: RegisterHandler;
+  login: LoginHandler;
   logout(): void;
 }
 
